@@ -1,0 +1,33 @@
+---
+# Hiera 5 Global configuration file
+
+version: 5
+
+defaults:                                                                                                                                                                                                         
+  data_hash: yaml_data                                                                                                                                                                                            
+  datadir: /etc/puppetlabs/code/environments/%{environment}/hieradata                                                                                                                                             
+hierarchy:                                                                                                                                                                                                        
+  - name: "Per-node"                                                                                                                                                                                              
+    path: "host/%{facts.networking.domain}/%{facts.networking.hostname}.yaml"                                                                                                                                     
+  - name: "Per-project-deployment-datacenter-role-rack"                                                                                                                                                           
+    path: "exads/%{facts.exads_deployment}/datacenter/%{facts.exads_datacenter}/%{facts.exads_role}/rack%{facts.exads_rack}.yaml"                                                                                 
+  - name: "Per-project-deployment-datacenter-role"                                                                                                                                                                
+    path: "exads/%{facts.exads_deployment}/datacenter/%{facts.exads_datacenter}/%{facts.exads_role}.yaml"                                                                                                         
+  - name: "Per-project-deployment-datacenter-rack"                                                                                                                                                                
+    path: "exads/%{facts.exads_deployment}/datacenter/%{facts.exads_datacenter}/rack%{facts.exads_rack}.yaml"                                                                                                     
+  - name: "Per-project-deployment-datacenter"                                                                                                                                                                     
+    path: "exads/%{facts.exads_deployment}/datacenter/%{facts.exads_datacenter}.yaml"                                                                                                                             
+  - name: "Per-project-deployment-role"                                                                                                                                                                           
+    path: "exads/%{facts.exads_deployment}/role/%{facts.exads_role}.yaml"                                                                                                                                         
+  - name: "Per-project-deployment"                                                                                                                                                                                
+    path: "exads/%{facts.exads_deployment}.yaml"                                                                                                                                                                  
+  - name: "Per-domain"                                                                                                                                                                                            
+    path: "domain/%{facts.networking.domain}.yaml"                                                                                                                                                                
+  - name: "Per-operatingsystem-major-release"                                                                                                                                                                     
+    path: "os/%{facts.os.name}-%{facts.os.release.major}.yaml"                                                                                                                                                    
+  - name: "Per-operatingsystem"                                                                                                                                                                                   
+    path: "os/%{facts.os.name}.yaml"                                                                                                                                                                              
+  - name: "Common data"                                                                                                                                                                                           
+    path: "common.yaml"                                                                                                                                                                                           
+  - name: "Local data"                                                                                                                                                                                            
+    path: "local.yaml"                                                                                                                                                                                            

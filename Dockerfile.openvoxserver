@@ -1,0 +1,28 @@
+FROM ghcr.io/openvoxproject/openvoxserver:latest
+
+#USER root
+
+# Use bash for all RUN commands
+#SHELL ["/bin/bash", "-c"]
+RUN echo "###########################################################################################################################"
+
+#RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4528B6CD9E61EF26
+RUN apt-get --allow-unauthenticated update; exit 0
+RUN apt-get install -y vim
+
+
+# Remove the Expired Key
+#RUN apt-key del 4528B6CD9E61EF26
+#RUN wget -O - https://apt.puppet.com/DEB-GPG-KEY-future | apt-key add -
+
+# Install vim and curl ignoring repo authentication
+#RUN apt-get update --allow-unauthenticated && \
+#    apt-get install -y --allow-unauthenticated vim curl gnupg && \
+#    apt-get clean
+
+# Optional: add updated Puppet GPG key for future builds
+#RUN curl -fsSL https://apt.puppet.com/DEB-GPG-KEY-puppet | gpg --dearmor > /etc/apt/trusted.gpg.d/puppet.gpg
+
+RUN echo "###########################################################################################################################"
+# Switch back to default puppet user
+#USER puppet

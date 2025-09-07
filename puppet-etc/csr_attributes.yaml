@@ -1,0 +1,5 @@
+---
+custom_attributes:
+  challengePassword: foobar
+extension_requests:
+  pp_project: foo

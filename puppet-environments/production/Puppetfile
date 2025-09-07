@@ -1,0 +1,7 @@
+forge 'forge.puppetlabs.com'
+
+
+mod 'puppetlabs-motd'
+
+# GitHub module
+mod 'geoipupdate', git: 'https://github.com/Stefano-exads/puppet-geoipupdate.git', branch: 'main'

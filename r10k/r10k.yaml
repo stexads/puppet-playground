@@ -1,0 +1,21 @@
+# The location to use for storing cached Git repos
+cachedir: '/var/cache/r10k'
+
+# r10k no longer hardcodes 'master' as the default ref
+git:
+  default_ref: 'master'
+
+# A list of git repositories to create
+
+:sources:
+  production:
+    remote: 'git@github.com:Stefano-exads/puppet-geoipupdate'
+    basedir: '/etc/puppetlabs/code/environments'
+
+
+#sources:
+  # This will clone the git repository and instantiate an environment per
+  # branch in /etc/puppetlabs/code/environments
+#  exads:
+#    remote: 'git@github.com:EXADS/sys-puppet'
+#    basedir: '/etc/puppetlabs/code/environments'

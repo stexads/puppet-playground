@@ -1,0 +1,615 @@
+ openvoxserver Pulling 
+ openvoxserver Warning pull access denied for openvoxserver, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+#1 [internal] load local bake definitions
+#1 reading from stdin 590B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.openvoxserver
+#2 transferring dockerfile: 1.08kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/openvoxproject/openvoxserver:latest
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/2] FROM ghcr.io/openvoxproject/openvoxserver:latest
+#5 CACHED
+
+#6 [2/2] RUN echo "########################################################## $(whoami) #################################################################"
+#6 0.123 ########################################################## root #################################################################
+#6 DONE 0.2s
+
+#7 exporting to image
+#7 exporting layers 0.0s done
+#7 writing image sha256:e9e07549415dbaabc5268c6ba9e57d55817cd28ff5b2f55357ad3882827cadd7 done
+#7 naming to docker.io/library/openvoxserver:latest done
+#7 DONE 0.0s
+
+#8 resolving provenance for metadata file
+#8 DONE 0.0s
+ openvoxserver:latest  Built
+ Network crafty-oss  Creating
+ Network crafty-oss  Created
+ Volume "oss_puppetserver-data"  Creating
+ Volume "oss_puppetserver-data"  Created
+ Volume "oss_openvoxdb"  Creating
+ Volume "oss_openvoxdb"  Created
+ Volume "oss_openvoxdb-postgres"  Creating
+ Volume "oss_openvoxdb-postgres"  Created
+ Volume "oss_openvoxserver"  Creating
+ Volume "oss_openvoxserver"  Created
+ Volume "oss_openvoxserver-ssl"  Creating
+ Volume "oss_openvoxserver-ssl"  Created
+ Volume "oss_openvoxserver-ca"  Creating
+ Volume "oss_openvoxserver-ca"  Created
+ Container oss-openvoxserver-1  Creating
+ Container oss-postgres-1  Creating
+ Container oss-postgres-1  Created
+ Container oss-openvoxserver-1  Created
+ Container oss-openvoxdb-1  Creating
+ Container oss-openvoxdb-1  Created
+ Container oss-puppetboard-1  Creating
+ Container oss-puppetboard-1  Created
+Attaching to openvoxdb-1, openvoxserver-1, postgres-1, puppetboard-1
+openvoxserver-1  | Entrypoint PID 7
+openvoxserver-1  | Running /container-entrypoint.d/20-use-templates-initially.sh
+openvoxserver-1  | Upgrading /opt/puppetlabs/server/data/puppetserver/vendored-jruby-gems
+postgres-1       | The files belonging to this database system will be owned by user "postgres".
+postgres-1       | This user must also own the server process.
+postgres-1       | 
+postgres-1       | The database cluster will be initialized with locale "en_US.utf8".
+postgres-1       | The default database encoding has accordingly been set to "UTF8".
+postgres-1       | The default text search configuration will be set to "english".
+postgres-1       | 
+postgres-1       | Data page checksums are disabled.
+postgres-1       | 
+postgres-1       | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres-1       | creating subdirectories ... ok
+postgres-1       | selecting dynamic shared memory implementation ... posix
+postgres-1       | selecting default "max_connections" ... 100
+postgres-1       | selecting default "shared_buffers" ... 128MB
+postgres-1       | selecting default time zone ... UTC
+postgres-1       | creating configuration files ... ok
+postgres-1       | running bootstrap script ... ok
+postgres-1       | sh: locale: not found
+postgres-1       | 2025-09-06 15:20:37.612 UTC [35] WARNING:  no usable system locales were found
+postgres-1       | performing post-bootstrap initialization ... ok
+openvoxserver-1  | Running /container-entrypoint.d/30-set-permissions.sh
+postgres-1       | syncing data to disk ... ok
+postgres-1       | 
+postgres-1       | 
+postgres-1       | Success. You can now start the database server using:
+postgres-1       | 
+postgres-1       |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres-1       | 
+postgres-1       | initdb: warning: enabling "trust" authentication for local connections
+postgres-1       | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+openvoxserver-1  | Running /container-entrypoint.d/40-update-puppetdb-conf.sh
+openvoxserver-1  | Running /container-entrypoint.d/50-set-certname.sh
+postgres-1       | waiting for server to start....2025-09-06 15:20:38.632 UTC [41] LOG:  starting PostgreSQL 17.6 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1       | 2025-09-06 15:20:38.633 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1       | 2025-09-06 15:20:38.636 UTC [44] LOG:  database system was shut down at 2025-09-06 15:20:37 UTC
+postgres-1       | 2025-09-06 15:20:38.640 UTC [41] LOG:  database system is ready to accept connections
+postgres-1       |  done
+postgres-1       | server started
+postgres-1       | CREATE DATABASE
+postgres-1       | 
+postgres-1       | 
+postgres-1       | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/pg_trm.sql
+postgres-1       | CREATE EXTENSION
+postgres-1       | 
+postgres-1       | 
+postgres-1       | waiting for server to shut down....2025-09-06 15:20:38.791 UTC [41] LOG:  received fast shutdown request
+postgres-1       | 2025-09-06 15:20:38.791 UTC [41] LOG:  aborting any active transactions
+postgres-1       | 2025-09-06 15:20:38.792 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+postgres-1       | 2025-09-06 15:20:38.793 UTC [42] LOG:  shutting down
+postgres-1       | 2025-09-06 15:20:38.794 UTC [42] LOG:  checkpoint starting: shutdown immediate
+postgres-1       | 2025-09-06 15:20:38.968 UTC [42] LOG:  checkpoint complete: wrote 933 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.026 s, sync=0.146 s, total=0.176 s; sync files=301, longest=0.002 s, average=0.001 s; distance=4350 kB, estimate=4350 kB; lsn=0/192CB38, redo lsn=0/192CB38
+postgres-1       | 2025-09-06 15:20:38.975 UTC [41] LOG:  database system is shut down
+postgres-1       |  done
+postgres-1       | server stopped
+postgres-1       | 
+postgres-1       | PostgreSQL init process complete; ready for start up.
+postgres-1       | 
+postgres-1       | 2025-09-06 15:20:39.009 UTC [1] LOG:  starting PostgreSQL 17.6 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+postgres-1       | 2025-09-06 15:20:39.010 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1       | 2025-09-06 15:20:39.010 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1       | 2025-09-06 15:20:39.011 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1       | 2025-09-06 15:20:39.014 UTC [59] LOG:  database system was shut down at 2025-09-06 15:20:38 UTC
+postgres-1       | 2025-09-06 15:20:39.018 UTC [1] LOG:  database system is ready to accept connections
+openvoxserver-1  | Running /container-entrypoint.d/55-set-masterport.sh
+openvoxserver-1  | Running /container-entrypoint.d/56-set-environmentpath.sh
+openvoxserver-1  | Running /container-entrypoint.d/57-set-hiera_config.sh
+openvoxserver-1  | Running /container-entrypoint.d/60-setup-autosign.sh
+openvoxserver-1  | Running /container-entrypoint.d/70-set-dns-alt-names.sh
+openvoxserver-1  | Running /container-entrypoint.d/83-environment-cache.sh
+openvoxserver-1  | Settings environment_timeout to unlimited
+openvoxserver-1  | Running /container-entrypoint.d/84-enable_graphite.sh
+openvoxserver-1  | Running /container-entrypoint.d/85-setup-storeconfigs.sh
+openvoxserver-1  | Running /container-entrypoint.d/88-enable-cache-delete-api.sh
+openvoxserver-1  | Running /container-entrypoint.d/89-csr_attributes.sh
+openvoxserver-1  | CSR Attributes: {"custom_attributes": { "challengePassword": "foobar" }, "extension_requests": { "pp_project": "foo" } }
+openvoxserver-1  | Running /container-entrypoint.d/90-ca.sh
+openvoxserver-1  | Generation succeeded. Find your files in /etc/puppetlabs/puppetserver/ca
+openvoxserver-1  | Running /container-entrypoint.d/99-log-config.sh
+openvoxserver-1  | System configuration values:
+openvoxserver-1  | * HOSTNAME: 'puppet'
+openvoxserver-1  | * hostname -f: 'puppet'
+openvoxserver-1  | * CERTNAME: unset, try to use the oldest certificate in the certs directory, because this might be the one that was used initially.
+openvoxserver-1  | * OPENVOXSERVER_PORT: '8140'
+openvoxserver-1  | * Certname: 'puppet.chello.ie.pem'
+openvoxserver-1  | * DNS_ALT_NAMES: ''
+openvoxserver-1  | * SSLDIR: '/etc/puppetlabs/puppet/ssl'
+openvoxserver-1  | CA Certificate:
+openvoxserver-1  | subject=CN = "Puppet CA generated on puppet at 2025-09-06 15:20:45 +0000"
+openvoxserver-1  | issuer=CN = Puppet Root CA: 3833945552705e
+openvoxserver-1  |         X509v3 extensions:
+openvoxserver-1  |             X509v3 Basic Constraints: critical
+openvoxserver-1  |                 CA:TRUE
+openvoxserver-1  |             X509v3 Key Usage: critical
+openvoxserver-1  |                 Certificate Sign, CRL Sign
+openvoxserver-1  |             X509v3 Subject Key Identifier: 
+openvoxserver-1  |                 4B:94:7F:04:3F:AB:CF:3F:36:E5:D8:D0:B5:6E:F3:83:51:A8:16:70
+openvoxserver-1  |             Netscape Comment: 
+openvoxserver-1  |                 Puppet Server Internal Certificate
+openvoxserver-1  |             X509v3 Authority Key Identifier: 
+openvoxserver-1  |                 41:2F:9F:3D:C6:04:83:32:1E:08:E7:3F:97:9E:9A:85:41:B8:56:3F
+openvoxserver-1  | Certificate puppet.chello.ie.pem:
+openvoxserver-1  | subject=CN = puppet.chello.ie
+openvoxserver-1  | issuer=CN = "Puppet CA generated on puppet at 2025-09-06 15:20:45 +0000"
+openvoxserver-1  |         X509v3 extensions:
+openvoxserver-1  |             1.3.6.1.4.1.34380.1.1.7: 
+openvoxserver-1  |                 ..foo
+openvoxserver-1  |             X509v3 Basic Constraints: critical
+openvoxserver-1  |                 CA:FALSE
+openvoxserver-1  |             Netscape Comment: 
+openvoxserver-1  |                 Puppet Server Internal Certificate
+openvoxserver-1  |             X509v3 Authority Key Identifier: 
+openvoxserver-1  |                 4B:94:7F:04:3F:AB:CF:3F:36:E5:D8:D0:B5:6E:F3:83:51:A8:16:70
+openvoxserver-1  |             X509v3 Extended Key Usage: critical
+openvoxserver-1  |                 TLS Web Server Authentication, TLS Web Client Authentication
+openvoxserver-1  |             X509v3 Key Usage: critical
+openvoxserver-1  |                 Digital Signature, Key Encipherment
+openvoxserver-1  |             X509v3 Subject Key Identifier: 
+openvoxserver-1  |                 97:95:C0:97:46:5F:9F:AC:B0:CA:58:E0:EE:CA:BB:72:23:8F:53:EB
+openvoxserver-1  |             1.3.6.1.4.1.34380.1.3.39: 
+openvoxserver-1  |                 ..true
+openvoxserver-1  |             X509v3 Subject Alternative Name: 
+openvoxserver-1  |                 DNS:puppet, DNS:puppet.chello.ie
+openvoxserver-1  | Starting Puppetserver
+openvoxserver-1  | 2025-09-06 15:20:49,691 INFO  [p.t.s.w.jetty10-core] Removing buggy security provider SunPKCS11 version 17
+openvoxserver-1  | 2025-09-06 15:20:49,965 INFO  [p.t.s.s.scheduler-service] Initializing Scheduler Service
+openvoxserver-1  | 2025-09-06 15:20:49,982 INFO  [o.q.i.StdSchedulerFactory] Using default implementation for ThreadExecutor
+openvoxserver-1  | 2025-09-06 15:20:49,987 INFO  [o.q.c.SchedulerSignalerImpl] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+openvoxserver-1  | 2025-09-06 15:20:49,987 INFO  [o.q.c.QuartzScheduler] Quartz Scheduler v.2.3.2 created.
+openvoxserver-1  | 2025-09-06 15:20:49,987 INFO  [o.q.s.RAMJobStore] RAMJobStore initialized.
+openvoxserver-1  | 2025-09-06 15:20:49,988 INFO  [o.q.c.QuartzScheduler] Scheduler meta-data: Quartz Scheduler (v2.3.2) '639f15d3-f987-4a00-a8d3-2b95001de16b' with instanceId 'NON_CLUSTERED'
+openvoxserver-1  |   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+openvoxserver-1  |   NOT STARTED.
+openvoxserver-1  |   Currently in standby mode.
+openvoxserver-1  |   Number of jobs executed: 0
+openvoxserver-1  |   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+openvoxserver-1  |   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+openvoxserver-1  | 
+openvoxserver-1  | 2025-09-06 15:20:49,988 INFO  [o.q.i.StdSchedulerFactory] Quartz scheduler '639f15d3-f987-4a00-a8d3-2b95001de16b' initialized from an externally provided properties instance.
+openvoxserver-1  | 2025-09-06 15:20:49,988 INFO  [o.q.i.StdSchedulerFactory] Quartz scheduler version: 2.3.2
+openvoxserver-1  | 2025-09-06 15:20:49,988 INFO  [o.q.c.QuartzScheduler] Scheduler 639f15d3-f987-4a00-a8d3-2b95001de16b_$_NON_CLUSTERED started.
+openvoxserver-1  | 2025-09-06 15:20:49,989 INFO  [p.t.s.w.jetty10-service] Initializing web server(s).
+openvoxserver-1  | 2025-09-06 15:20:50,004 INFO  [p.t.s.s.status-service] Registering status callback function for service 'puppet-profiler', version 8.11.0
+openvoxserver-1  | 2025-09-06 15:20:50,010 INFO  [p.s.j.jruby-puppet-service] Initializing the JRuby service
+openvoxserver-1  | 2025-09-06 15:20:50,016 INFO  [p.s.j.jruby-pool-manager-service] Initializing the JRuby service
+openvoxserver-1  | 2025-09-06 15:20:50,019 INFO  [p.s.j.jruby-puppet-service] JRuby version info: jruby 9.4.8.0 (3.1.4) 2024-07-02 4d41e55a67 OpenJDK 64-Bit Server VM 17.0.16+8-Ubuntu-0ubuntu124.04.1 on 17.0.16+8-Ubuntu-0ubuntu124.04.1 +jit [x86_64-linux]
+openvoxserver-1  | 2025-09-06 15:20:50,025 INFO  [p.s.j.i.jruby-internal] Creating JRubyInstance with id 1.
+openvoxserver-1  | 2025-09-06 15:20:50,027 INFO  [p.t.s.s.status-service] Registering status callback function for service 'jruby-metrics', version 8.11.0
+openvoxserver-1  | 2025-09-06 15:20:50,028 INFO  [p.s.v.versioned-code-service] No code-id-command set for versioned-code-service. Code-id will be nil.
+openvoxserver-1  | 2025-09-06 15:20:50,028 INFO  [p.s.v.versioned-code-service] No code-content-command set for versioned-code-service. Attempting to fetch code content will fail.
+openvoxserver-1  | 2025-09-06 15:20:54,718 INFO  [puppetserver] Puppet Puppet settings initialized; run mode: server
+openvoxserver-1  | 2025-09-06 15:20:56,171 INFO  [p.s.j.i.jruby-agents] Finished creating JRubyInstance 1 of clojure.core$count@5f1fb16a
+openvoxserver-1  | 2025-09-06 15:20:56,176 INFO  [p.s.c.puppet-server-config-core] Initializing webserver settings from core Puppet
+openvoxserver-1  | 2025-09-06 15:20:56,187 INFO  [p.p.certificate-authority] CA already initialized for SSL
+openvoxserver-1  | 2025-09-06 15:20:56,190 INFO  [p.s.c.certificate-authority-service] CA Service adding a ring handler
+openvoxserver-1  | 2025-09-06 15:20:56,211 INFO  [p.t.s.s.status-service] Registering status callback function for service 'ca', version 8.11.0
+openvoxserver-1  | 2025-09-06 15:20:56,212 INFO  [p.s.p.puppet-admin-service] Starting Puppet Admin web app
+openvoxserver-1  | 2025-09-06 15:20:56,218 INFO  [p.t.s.m.jolokia] Metrics access control using trapperkeeper-authorization is enabled.
+openvoxserver-1  | 2025-09-06 15:20:56,306 INFO  [p.p.certificate-authority] Master already initialized for SSL
+openvoxserver-1  | 2025-09-06 15:20:56,309 INFO  [p.s.m.master-service] Master Service adding ring handlers
+openvoxserver-1  | 2025-09-06 15:20:56,310 INFO  [p.t.s.s.status-service] Registering status callback function for service 'master', version 8.11.0
+openvoxserver-1  | 2025-09-06 15:20:56,310 INFO  [p.t.s.s.status-service] Registering status callback function for service 'server', version 8.11.0
+openvoxserver-1  | 2025-09-06 15:20:56,311 INFO  [p.t.s.w.jetty10-service] Starting web server(s).
+openvoxserver-1  | 2025-09-06 15:20:56,314 INFO  [p.t.s.w.jetty10-core] webserver config overridden for key 'ssl-cert'
+openvoxserver-1  | 2025-09-06 15:20:56,314 INFO  [p.t.s.w.jetty10-core] webserver config overridden for key 'ssl-key'
+openvoxserver-1  | 2025-09-06 15:20:56,315 INFO  [p.t.s.w.jetty10-core] webserver config overridden for key 'ssl-ca-cert'
+openvoxserver-1  | 2025-09-06 15:20:56,315 INFO  [p.t.s.w.jetty10-core] webserver config overridden for key 'ssl-crl-path'
+openvoxserver-1  | 2025-09-06 15:20:56,365 INFO  [p.t.s.w.jetty10-config] Enabling access logger using file /etc/puppetlabs/puppetserver/request-logging.xml
+openvoxserver-1  | 2025-09-06 15:20:56,384 INFO  [p.t.s.w.jetty10-core] Using specified access logging
+openvoxserver-1  | 2025-09-06 15:20:56,385 INFO  [p.t.s.w.jetty10-core] Server shutdown timeout set to 30,000 milliseconds
+openvoxserver-1  | 2025-09-06 15:20:56,386 INFO  [p.t.s.w.jetty10-core] Starting web server.
+openvoxserver-1  | 2025-09-06 15:20:56,388 INFO  [o.e.j.s.Server] jetty-10.0.20; built: 2024-01-29T20:46:45.278Z; git: 3a745c71c23682146f262b99f4ddc4c1bc41630c; jvm 17.0.16+8-Ubuntu-0ubuntu124.04.1
+openvoxserver-1  | 2025-09-06 15:20:56,432 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@6c958873{/puppet-ca,null,AVAILABLE}
+openvoxserver-1  | 2025-09-06 15:20:56,433 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@4ed750c0{/puppet-admin-api,null,AVAILABLE}
+openvoxserver-1  | 2025-09-06 15:20:56,438 INFO  [o.e.j.s.s.DefaultSessionIdManager] Session workerName=node0
+openvoxserver-1  | 2025-09-06 15:20:56,451 INFO  [p.t.s.m.jolokia] Using policy access restrictor classpath:/jolokia-access.xml
+openvoxserver-1  | 2025-09-06 15:20:56,470 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@5a348750{/metrics/v2,null,AVAILABLE}
+openvoxserver-1  | 2025-09-06 15:20:56,471 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@456fcbb{/puppet,null,AVAILABLE}
+openvoxserver-1  | 15:20:56,471 |-INFO in LogbackRequestLog - Will use configuration file [/etc/puppetlabs/puppetserver/request-logging.xml]
+openvoxserver-1  | 15:20:56,475 |-INFO in ch.qos.logback.access.model.processor.ConfigurationModelHandler - debug attribute not set
+openvoxserver-1  | 15:20:56,475 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [STDOUT]
+openvoxserver-1  | 15:20:56,475 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+openvoxserver-1  | 15:20:56,475 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.access.PatternLayoutEncoder] for [encoder] property
+openvoxserver-1  | 15:20:56,476 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [STDOUT] to null
+openvoxserver-1  | 15:20:56,476 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@683a0064 - End of configuration.
+openvoxserver-1  | 15:20:56,476 |-INFO in ch.qos.logback.access.joran.JoranConfigurator@3a1a318c - Registering current configuration as safe fallback point
+openvoxserver-1  | 
+openvoxserver-1  | 2025-09-06 15:20:56,487 INFO  [o.e.j.u.s.SslContextFactory] x509=X509@1a63caa8(private key,h=[puppet, puppet.chello.ie],a=[],w=[]) for InternalSslContextFactory@585f795d[provider=null,keyStore=null,trustStore=null]
+openvoxserver-1  | 2025-09-06 15:20:56,545 INFO  [o.e.j.s.AbstractConnector] Started ServerConnector@7da82c81{SSL, (ssl, http/1.1)}{0.0.0.0:8140}
+openvoxserver-1  | 2025-09-06 15:20:56,546 INFO  [o.e.j.s.Server] Started Server@7a4126c4{STARTING}[10.0.20,sto=30000] @8847ms
+openvoxserver-1  | 2025-09-06 15:20:56,549 INFO  [p.t.s.s.status-core] Starting background monitoring of cpu usage metrics
+openvoxserver-1  | 2025-09-06 15:20:56,553 INFO  [p.t.s.s.status-service] Registering status callback function for service 'status-service', version 1.2.0
+openvoxserver-1  | 2025-09-06 15:20:56,553 INFO  [p.t.s.s.status-service] Registering status service HTTP API at /status
+openvoxserver-1  | 2025-09-06 15:20:56,558 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@3cddd216{/status,null,AVAILABLE}
+openvoxserver-1  | 2025-09-06 15:20:56,563 INFO  [p.s.c.certificate-authority-service] Starting CA service
+openvoxserver-1  | 2025-09-06 15:20:56,565 INFO  [p.s.m.master-service] Puppet Server has successfully started and is now ready to handle requests
+openvoxserver-1  | 127.0.0.1 - - - 06/Sep/2025:15:20:57 +0000 "GET /status/v1/simple HTTP/1.1" 200 7 127.0.0.1 127.0.0.1 8140 28
+openvoxdb-1      | Running /container-entrypoint.d/10-wait-for-hosts.sh
+openvoxdb-1      | wtfc.sh: waiting 30 seconds for dig postgres && host -t A postgres
+openvoxdb-1      | wtfc.sh: dig postgres && host -t A postgres finished with expected status 0 after 0 seconds
+openvoxdb-1      | 
+openvoxdb-1      | ; <<>> DiG 9.18.30-0ubuntu0.24.04.2-Ubuntu <<>> postgres
+openvoxdb-1      | ;; global options: +cmd
+openvoxdb-1      | ;; Got answer:
+openvoxdb-1      | ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 29852
+openvoxdb-1      | ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+openvoxdb-1      | 
+openvoxdb-1      | ;; QUESTION SECTION:
+openvoxdb-1      | ;postgres.			IN	A
+openvoxdb-1      | 
+openvoxdb-1      | ;; ANSWER SECTION:
+openvoxdb-1      | postgres.		600	IN	A	172.18.0.3
+openvoxdb-1      | 
+openvoxdb-1      | ;; Query time: 0 msec
+openvoxdb-1      | ;; SERVER: 127.0.0.11#53(127.0.0.11) (UDP)
+openvoxdb-1      | ;; WHEN: Sat Sep 06 15:20:58 UTC 2025
+openvoxdb-1      | ;; MSG SIZE  rcvd: 50
+openvoxdb-1      | 
+openvoxdb-1      | wtfc.sh: waiting 30 seconds for dig puppet && host -t A puppet
+openvoxdb-1      | wtfc.sh: dig puppet && host -t A puppet finished with expected status 0 after 0 seconds
+openvoxdb-1      | 
+openvoxdb-1      | ; <<>> DiG 9.18.30-0ubuntu0.24.04.2-Ubuntu <<>> puppet
+openvoxdb-1      | ;; global options: +cmd
+openvoxdb-1      | ;; Got answer:
+openvoxdb-1      | ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 10203
+openvoxdb-1      | ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+openvoxdb-1      | 
+openvoxdb-1      | ;; QUESTION SECTION:
+openvoxdb-1      | ;puppet.				IN	A
+openvoxdb-1      | 
+openvoxdb-1      | ;; ANSWER SECTION:
+openvoxdb-1      | puppet.			600	IN	A	172.18.0.2
+openvoxdb-1      | 
+openvoxdb-1      | ;; Query time: 0 msec
+openvoxdb-1      | ;; SERVER: 127.0.0.11#53(127.0.0.11) (UDP)
+openvoxdb-1      | ;; WHEN: Sat Sep 06 15:20:58 UTC 2025
+openvoxdb-1      | ;; MSG SIZE  rcvd: 46
+openvoxdb-1      | 
+openvoxdb-1      | wtfc.sh: waiting 360 seconds for curl --silent --fail --insecure 'https://puppet:8140/status/v1/simple' | grep -q '^running$'
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:58 +0000 "GET /status/v1/simple HTTP/1.1" 200 7 172.18.0.4 172.18.0.4 8140 2
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:58 +0000 "GET /status/v1/simple HTTP/1.1" 200 7 172.18.0.4 172.18.0.4 8140 2
+openvoxdb-1      | wtfc.sh: curl --silent --fail --insecure 'https://puppet:8140/status/v1/simple' | grep -q '^running$' finished with expected status 0 after 0 seconds
+openvoxdb-1      | wtfc.sh: waiting 60 seconds for nc -v -w 1 -z 'postgres' 5432
+openvoxdb-1      | wtfc.sh: nc -v -w 1 -z 'postgres' 5432 finished with expected status 0 after 0 seconds
+openvoxdb-1      | Running /container-entrypoint.d/20-configure-ssl.sh
+openvoxdb-1      | (/ssl.sh) Using configuration values:
+openvoxdb-1      | (/ssl.sh) * HOSTNAME: 'openvoxdb'
+openvoxdb-1      | (/ssl.sh) * hostname -f: 'openvoxdb'
+openvoxdb-1      | (/ssl.sh) * CERTNAME: 'openvoxdb' (/CN=openvoxdb)
+openvoxdb-1      | (/ssl.sh) * DNS_ALT_NAMES: ''
+openvoxdb-1      | (/ssl.sh) * CA: 'puppet:8140/puppet-ca/v1'
+openvoxdb-1      | (/ssl.sh) * SSLDIR: '/opt/puppetlabs/server/data/puppetdb/certs'
+openvoxdb-1      | (/ssl.sh) * WAITFORCERT: '120' seconds
+openvoxdb-1      | (/ssl.sh) Waiting for puppet to be running to generate certificates...
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:58 +0000 "GET /status/v1/simple HTTP/1.0" 200 7 172.18.0.4 172.18.0.4 8140 3
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:58 +0000 "GET /puppet-ca/v1/certificate/ca HTTP/1.0" 200 3899 172.18.0.4 172.18.0.4 8140 6
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:58 +0000 "GET /puppet-ca/v1/certificate/ca HTTP/1.0" 200 3899 172.18.0.4 172.18.0.4 8140 2
+openvoxdb-1      | subject=CN = "Puppet CA generated on puppet at 2025-09-06 15:20:45 +0000"
+openvoxdb-1      | issuer=CN = Puppet Root CA: 3833945552705e
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:58 +0000 "GET /puppet-ca/v1/certificate_revocation_list/ca HTTP/1.0" 200 1978 172.18.0.4 172.18.0.4 8140 4
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:58 +0000 "GET /puppet-ca/v1/certificate/openvoxdb HTTP/1.0" 404 36 172.18.0.4 172.18.0.4 8140 3
+openvoxdb-1      | writing RSA key
+openvoxdb-1      | (/ssl.sh) Submitting CSR...
+openvoxserver-1  | 2025-09-06 15:20:59,612 INFO  [p.p.certificate-authority] Entity CA signed 1 certificate: openvoxdb.
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:59 +0000 "PUT /puppet-ca/v1/certificate_request/openvoxdb HTTP/1.0" 200 0 172.18.0.4 172.18.0.4 8140 138
+openvoxdb-1      | (/ssl.sh) Waiting for certificate to be signed...
+openvoxserver-1  | 172.18.0.4 - - - 06/Sep/2025:15:20:59 +0000 "GET /puppet-ca/v1/certificate/openvoxdb HTTP/1.0" 200 2082 172.18.0.4 172.18.0.4 8140 3
+openvoxdb-1      | (/ssl.sh) Securing permissions on /opt/puppetlabs/server/data/puppetdb/certs
+openvoxdb-1      | subject=CN = openvoxdb
+openvoxdb-1      | issuer=CN = "Puppet CA generated on puppet at 2025-09-06 15:20:45 +0000"
+openvoxdb-1      |         X509v3 extensions:
+openvoxdb-1      |             X509v3 Subject Alternative Name: 
+openvoxdb-1      |                 DNS:openvoxdb
+openvoxdb-1      |             Netscape Comment: 
+openvoxdb-1      |                 Puppet Server Internal Certificate
+openvoxdb-1      |             X509v3 Authority Key Identifier: 
+openvoxdb-1      |                 keyid:4B:94:7F:04:3F:AB:CF:3F:36:E5:D8:D0:B5:6E:F3:83:51:A8:16:70
+openvoxdb-1      |                 DirName:/CN=Puppet Root CA: 3833945552705e
+openvoxdb-1      |                 serial:02
+openvoxdb-1      |             X509v3 Subject Key Identifier: 
+openvoxdb-1      |                 40:DD:4F:B6:96:C1:12:36:CE:B0:54:65:B3:57:52:40:18:DF:A5:E3
+openvoxdb-1      |             X509v3 Basic Constraints: critical
+openvoxdb-1      |                 CA:FALSE
+openvoxdb-1      |             X509v3 Extended Key Usage: critical
+openvoxdb-1      |                 TLS Web Server Authentication, TLS Web Client Authentication
+openvoxdb-1      |             X509v3 Key Usage: critical
+openvoxdb-1      |                 Digital Signature, Key Encipherment
+openvoxdb-1      | (/ssl.sh) Successfully signed certificate '/opt/puppetlabs/server/data/puppetdb/certs/certs/openvoxdb.pem'
+openvoxdb-1      | Setting ownership for /opt/puppetlabs/server/data/puppetdb/certs to puppetdb:puppetdb
+openvoxdb-1      | Running /container-entrypoint.d/30-certificate-allowlist.sh
+openvoxdb-1      | 2025-09-06 15:21:01,895 INFO  [p.t.s.w.jetty10-core] Removing buggy security provider SunPKCS11 version 17
+openvoxdb-1      | 2025-09-06 15:21:02,335 INFO  [p.t.s.s.scheduler-service] Initializing Scheduler Service
+openvoxdb-1      | 2025-09-06 15:21:02,349 INFO  [o.q.i.StdSchedulerFactory] Using default implementation for ThreadExecutor
+openvoxdb-1      | 2025-09-06 15:21:02,354 INFO  [o.q.c.SchedulerSignalerImpl] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+openvoxdb-1      | 2025-09-06 15:21:02,355 INFO  [o.q.c.QuartzScheduler] Quartz Scheduler v.2.3.2 created.
+openvoxdb-1      | 2025-09-06 15:21:02,355 INFO  [o.q.s.RAMJobStore] RAMJobStore initialized.
+openvoxdb-1      | 2025-09-06 15:21:02,355 INFO  [o.q.c.QuartzScheduler] Scheduler meta-data: Quartz Scheduler (v2.3.2) '927e3a46-3e5d-437e-967a-ef0134268bf4' with instanceId 'NON_CLUSTERED'
+openvoxdb-1      |   Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+openvoxdb-1      |   NOT STARTED.
+openvoxdb-1      |   Currently in standby mode.
+openvoxdb-1      |   Number of jobs executed: 0
+openvoxdb-1      |   Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+openvoxdb-1      |   Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+openvoxdb-1      | 
+openvoxdb-1      | 2025-09-06 15:21:02,355 INFO  [o.q.i.StdSchedulerFactory] Quartz scheduler '927e3a46-3e5d-437e-967a-ef0134268bf4' initialized from an externally provided properties instance.
+openvoxdb-1      | 2025-09-06 15:21:02,355 INFO  [o.q.i.StdSchedulerFactory] Quartz scheduler version: 2.3.2
+openvoxdb-1      | 2025-09-06 15:21:02,355 INFO  [o.q.c.QuartzScheduler] Scheduler 927e3a46-3e5d-437e-967a-ef0134268bf4_$_NON_CLUSTERED started.
+openvoxdb-1      | 2025-09-06 15:21:02,356 INFO  [p.t.s.w.jetty10-service] Initializing web server(s).
+openvoxdb-1      | 2025-09-06 15:21:02,372 WARN  [p.p.config] The configuration item `:disable-update-checking` does not exist and should be removed from the config.
+openvoxdb-1      | 2025-09-06 15:21:02,380 INFO  [p.p.pdb-routing] Starting PuppetDB, entering maintenance mode
+openvoxdb-1      | 2025-09-06 15:21:02,401 INFO  [p.t.s.s.status-service] Registering status callback function for service 'puppetdb-status', version 8.11.0
+openvoxdb-1      | 2025-09-06 15:21:02,405 INFO  [p.t.s.n.nrepl-service] nREPL service disabled, not starting
+openvoxdb-1      | 2025-09-06 15:21:02,407 INFO  [p.t.s.m.jolokia] Metrics access control using trapperkeeper-authorization is enabled.
+openvoxdb-1      | 2025-09-06 15:21:02,413 INFO  [p.t.s.w.jetty10-service] Starting web server(s).
+openvoxdb-1      | 2025-09-06 15:21:02,495 INFO  [p.t.s.w.jetty10-config] Enabling access logger using file /etc/puppetlabs/puppetdb/request-logging.xml
+openvoxdb-1      | 2025-09-06 15:21:02,515 INFO  [p.t.s.w.jetty10-core] Using specified access logging
+openvoxdb-1      | 2025-09-06 15:21:02,516 INFO  [p.t.s.w.jetty10-core] Server shutdown timeout set to 30,000 milliseconds
+openvoxdb-1      | 2025-09-06 15:21:02,517 INFO  [p.t.s.w.jetty10-core] Starting web server.
+openvoxdb-1      | 2025-09-06 15:21:02,519 INFO  [o.e.j.s.Server] jetty-10.0.20; built: 2024-01-29T20:46:45.278Z; git: 3a745c71c23682146f262b99f4ddc4c1bc41630c; jvm 17.0.16+8-Ubuntu-0ubuntu124.04.1
+openvoxdb-1      | 2025-09-06 15:21:02,544 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@6956511e{/pdb,null,AVAILABLE}
+openvoxdb-1      | 2025-09-06 15:21:02,549 INFO  [o.e.j.s.s.DefaultSessionIdManager] Session workerName=node0
+openvoxdb-1      | 2025-09-06 15:21:02,563 INFO  [p.t.s.m.jolokia] Using policy access restrictor classpath:/jolokia-access.xml
+openvoxdb-1      | 2025-09-06 15:21:02,581 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@36ba5f4b{/metrics/v2,null,AVAILABLE}
+openvoxdb-1      | 15:21:02,582 |-INFO in LogbackRequestLog - Will use configuration file [/etc/puppetlabs/puppetdb/request-logging.xml]
+openvoxdb-1      | 15:21:02,587 |-INFO in ch.qos.logback.access.model.processor.ConfigurationModelHandler - debug attribute not set
+openvoxdb-1      | 15:21:02,587 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [STDOUT]
+openvoxdb-1      | 15:21:02,587 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+openvoxdb-1      | 15:21:02,587 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.access.PatternLayoutEncoder] for [encoder] property
+openvoxdb-1      | 15:21:02,589 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [FILE]
+openvoxdb-1      | 15:21:02,589 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+openvoxdb-1      | 15:21:02,589 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1273378011 - setting totalSizeCap to 1 GB
+openvoxdb-1      | 15:21:02,589 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1273378011 - Archive files will be limited to [200 MB] each.
+openvoxdb-1      | 15:21:02,589 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1273378011 - Will use gz compression
+openvoxdb-1      | 15:21:02,589 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1273378011 - Will use the pattern /opt/puppetlabs/server/data/puppetdb/logs/puppetdb-access-%d{yyyy-MM-dd}.%i.log for the active file
+openvoxdb-1      | 15:21:02,590 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@30646471 - The date pattern is 'yyyy-MM-dd' from file name pattern '/opt/puppetlabs/server/data/puppetdb/logs/puppetdb-access-%d{yyyy-MM-dd}.%i.log.gz'.
+openvoxdb-1      | 15:21:02,590 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@30646471 - Roll-over at midnight.
+openvoxdb-1      | 15:21:02,590 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP@30646471 - Setting initial period to 2025-09-06T15:21:02.590Z
+openvoxdb-1      | 15:21:02,590 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.access.PatternLayoutEncoder] for [encoder] property
+openvoxdb-1      | 15:21:02,591 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: /opt/puppetlabs/server/data/puppetdb/logs/puppetdb-access.log
+openvoxdb-1      | 15:21:02,591 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [/opt/puppetlabs/server/data/puppetdb/logs/puppetdb-access.log]
+openvoxdb-1      | 15:21:02,591 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [FILE] to null
+openvoxdb-1      | 15:21:02,591 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [STDOUT] to null
+openvoxdb-1      | 15:21:02,591 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@44fa504f - End of configuration.
+openvoxdb-1      | 15:21:02,591 |-INFO in ch.qos.logback.access.joran.JoranConfigurator@22eb8ea8 - Registering current configuration as safe fallback point
+openvoxdb-1      | 
+openvoxdb-1      | 2025-09-06 15:21:02,600 INFO  [o.e.j.s.AbstractConnector] Started ServerConnector@7f3a58d3{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+openvoxdb-1      | 2025-09-06 15:21:02,604 INFO  [o.e.j.u.s.SslContextFactory] x509=X509@77394236(private key,h=[openvoxdb],a=[],w=[]) for InternalSslContextFactory@5573fb94[provider=null,keyStore=null,trustStore=null]
+openvoxdb-1      | 2025-09-06 15:21:02,652 INFO  [o.e.j.s.AbstractConnector] Started ServerConnector@321ed35{SSL, (ssl, http/1.1)}{0.0.0.0:8081}
+openvoxdb-1      | 2025-09-06 15:21:02,653 INFO  [o.e.j.s.Server] Started Server@4ec54058{STARTING}[10.0.20,sto=30000] @2960ms
+openvoxdb-1      | 2025-09-06 15:21:02,655 INFO  [p.t.s.s.status-core] Starting background monitoring of cpu usage metrics
+openvoxdb-1      | 2025-09-06 15:21:02,658 INFO  [p.t.s.s.status-service] Registering status callback function for service 'status-service', version 1.2.0
+openvoxdb-1      | 2025-09-06 15:21:02,658 INFO  [p.t.s.s.status-service] Registering status service HTTP API at /status
+openvoxdb-1      | 2025-09-06 15:21:02,664 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@7ff348c1{/status,null,AVAILABLE}
+openvoxdb-1      | 2025-09-06 15:21:02,665 INFO  [p.p.c.services] PuppetDB version 8.11.0
+openvoxdb-1      | 2025-09-06 15:21:02,666 INFO  [p.p.c.services] Ensuring default database is up to date
+openvoxdb-1      | 2025-09-06 15:21:02,668 INFO  [c.z.h.HikariDataSource] PDBMigrationsPool: default - Starting...
+openvoxdb-1      | 2025-09-06 15:21:02,679 INFO  [c.z.h.HikariDataSource] PDBMigrationsPool: default - Start completed.
+openvoxdb-1      | 2025-09-06 15:21:02,767 INFO  [p.p.s.migrate] Locking migrations table before migrating
+openvoxdb-1      | 2025-09-06 15:21:02,777 INFO  [p.p.s.migrate] Applying database migration version 0
+openvoxdb-1      | 2025-09-06 15:21:02,782 INFO  [p.p.s.migrate] Applied database migration version 0 in 4 ms
+openvoxdb-1      | 2025-09-06 15:21:02,782 INFO  [p.p.s.migrate] Applying database migration version 28
+openvoxdb-1      | 2025-09-06 15:21:02,834 INFO  [p.p.s.migrate] Applied database migration version 28 in 52 ms
+openvoxdb-1      | 2025-09-06 15:21:02,834 INFO  [p.p.s.migrate] Applying database migration version 29
+openvoxdb-1      | 2025-09-06 15:21:02,902 INFO  [p.p.s.migrate] Applied database migration version 29 in 68 ms
+openvoxdb-1      | 2025-09-06 15:21:02,903 INFO  [p.p.s.migrate] Applying database migration version 30
+openvoxdb-1      | 2025-09-06 15:21:02,903 INFO  [p.p.s.migrate] Applied database migration version 30 in 0 ms
+openvoxdb-1      | 2025-09-06 15:21:02,903 INFO  [p.p.s.migrate] Applying database migration version 31
+openvoxdb-1      | 2025-09-06 15:21:02,906 INFO  [p.p.s.migrate] Applied database migration version 31 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:02,906 INFO  [p.p.s.migrate] Applying database migration version 32
+openvoxdb-1      | 2025-09-06 15:21:02,908 INFO  [p.p.s.migrate] Applied database migration version 32 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,908 INFO  [p.p.s.migrate] Applying database migration version 33
+openvoxdb-1      | 2025-09-06 15:21:02,919 INFO  [p.p.s.migrate] Applied database migration version 33 in 10 ms
+openvoxdb-1      | 2025-09-06 15:21:02,919 INFO  [p.p.s.migrate] Applying database migration version 34
+openvoxdb-1      | 2025-09-06 15:21:02,928 INFO  [p.p.s.migrate] Applied database migration version 34 in 9 ms
+openvoxdb-1      | 2025-09-06 15:21:02,929 INFO  [p.p.s.migrate] Applying database migration version 35
+openvoxdb-1      | 2025-09-06 15:21:02,929 INFO  [p.p.s.migrate] Applied database migration version 35 in 0 ms
+openvoxdb-1      | 2025-09-06 15:21:02,929 INFO  [p.p.s.migrate] Applying database migration version 36
+openvoxdb-1      | 2025-09-06 15:21:02,930 INFO  [p.p.s.migrate] Applied database migration version 36 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,930 INFO  [p.p.s.migrate] Applying database migration version 37
+openvoxdb-1      | 2025-09-06 15:21:02,931 INFO  [p.p.s.migrate] Applied database migration version 37 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,931 INFO  [p.p.s.migrate] Applying database migration version 38
+openvoxdb-1      | 2025-09-06 15:21:02,932 INFO  [p.p.s.migrate] Applied database migration version 38 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,932 INFO  [p.p.s.migrate] Applying database migration version 39
+openvoxdb-1      | 2025-09-06 15:21:02,937 INFO  [p.p.s.migrate] Applied database migration version 39 in 5 ms
+openvoxdb-1      | 2025-09-06 15:21:02,938 INFO  [p.p.s.migrate] Applying database migration version 40
+openvoxdb-1      | 2025-09-06 15:21:02,942 INFO  [p.p.s.migrate] Applied database migration version 40 in 4 ms
+openvoxdb-1      | 2025-09-06 15:21:02,942 INFO  [p.p.s.migrate] Applying database migration version 41
+openvoxdb-1      | 2025-09-06 15:21:02,944 INFO  [p.p.s.migrate] Applied database migration version 41 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:02,944 INFO  [p.p.s.migrate] Applying database migration version 42
+openvoxdb-1      | 2025-09-06 15:21:02,958 INFO  [p.p.s.migrate] Applied database migration version 42 in 13 ms
+openvoxdb-1      | 2025-09-06 15:21:02,958 INFO  [p.p.s.migrate] Applying database migration version 43
+openvoxdb-1      | 2025-09-06 15:21:02,960 INFO  [p.p.s.migrate] Applied database migration version 43 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:02,960 INFO  [p.p.s.migrate] Applying database migration version 44
+openvoxdb-1      | 2025-09-06 15:21:02,962 INFO  [p.p.s.migrate] Applied database migration version 44 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:02,962 INFO  [p.p.s.migrate] Applying database migration version 45
+openvoxdb-1      | 2025-09-06 15:21:02,962 INFO  [p.p.s.migrate] Applied database migration version 45 in 0 ms
+openvoxdb-1      | 2025-09-06 15:21:02,963 INFO  [p.p.s.migrate] Applying database migration version 46
+openvoxdb-1      | 2025-09-06 15:21:02,963 INFO  [p.p.s.migrate] Applied database migration version 46 in 0 ms
+openvoxdb-1      | 2025-09-06 15:21:02,963 INFO  [p.p.s.migrate] Applying database migration version 47
+openvoxdb-1      | 2025-09-06 15:21:02,970 INFO  [p.p.s.migrate] Applied database migration version 47 in 6 ms
+openvoxdb-1      | 2025-09-06 15:21:02,970 INFO  [p.p.s.migrate] Applying database migration version 48
+openvoxdb-1      | 2025-09-06 15:21:02,971 INFO  [p.p.s.migrate] Applied database migration version 48 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,971 INFO  [p.p.s.migrate] Applying database migration version 49
+openvoxdb-1      | 2025-09-06 15:21:02,972 INFO  [p.p.s.migrate] Applied database migration version 49 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,972 INFO  [p.p.s.migrate] Applying database migration version 50
+openvoxdb-1      | 2025-09-06 15:21:02,975 INFO  [p.p.s.migrate] Applied database migration version 50 in 3 ms
+openvoxdb-1      | 2025-09-06 15:21:02,975 INFO  [p.p.s.migrate] Applying database migration version 51
+openvoxdb-1      | 2025-09-06 15:21:02,984 INFO  [p.p.s.migrate] Applied database migration version 51 in 9 ms
+openvoxdb-1      | 2025-09-06 15:21:02,985 INFO  [p.p.s.migrate] Applying database migration version 52
+openvoxdb-1      | 2025-09-06 15:21:02,991 INFO  [p.p.s.migrate] Applied database migration version 52 in 6 ms
+openvoxdb-1      | 2025-09-06 15:21:02,992 INFO  [p.p.s.migrate] Applying database migration version 53
+openvoxdb-1      | 2025-09-06 15:21:02,993 INFO  [p.p.s.migrate] Applied database migration version 53 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,993 INFO  [p.p.s.migrate] Applying database migration version 54
+openvoxdb-1      | 2025-09-06 15:21:02,994 INFO  [p.p.s.migrate] Applied database migration version 54 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,994 INFO  [p.p.s.migrate] Applying database migration version 55
+openvoxdb-1      | 2025-09-06 15:21:02,995 INFO  [p.p.s.migrate] Applied database migration version 55 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:02,995 INFO  [p.p.s.migrate] Applying database migration version 56
+openvoxdb-1      | 2025-09-06 15:21:03,005 INFO  [p.p.s.migrate] Applied database migration version 56 in 10 ms
+openvoxdb-1      | 2025-09-06 15:21:03,005 INFO  [p.p.s.migrate] Applying database migration version 57
+openvoxdb-1      | 2025-09-06 15:21:03,012 INFO  [p.p.s.migrate] Applied database migration version 57 in 5 ms
+openvoxdb-1      | 2025-09-06 15:21:03,012 INFO  [p.p.s.migrate] Applying database migration version 58
+openvoxdb-1      | 2025-09-06 15:21:03,013 INFO  [p.p.s.migrate] Applied database migration version 58 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:03,013 INFO  [p.p.s.migrate] Applying database migration version 59
+openvoxdb-1      | 2025-09-06 15:21:03,014 INFO  [p.p.s.migrate] Applied database migration version 59 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:03,014 INFO  [p.p.s.migrate] Applying database migration version 60
+openvoxdb-1      | 2025-09-06 15:21:03,020 INFO  [p.p.s.migrate] Cleaning up orphaned edges
+openvoxdb-1      | 2025-09-06 15:21:03,025 INFO  [p.p.s.migrate] Applied database migration version 60 in 10 ms
+openvoxdb-1      | 2025-09-06 15:21:03,025 INFO  [p.p.s.migrate] Applying database migration version 61
+openvoxdb-1      | 2025-09-06 15:21:03,026 INFO  [p.p.s.migrate] Applied database migration version 61 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:03,026 INFO  [p.p.s.migrate] Applying database migration version 62
+openvoxdb-1      | 2025-09-06 15:21:03,028 INFO  [p.p.s.migrate] Applied database migration version 62 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:03,028 INFO  [p.p.s.migrate] Applying database migration version 63
+openvoxdb-1      | 2025-09-06 15:21:03,030 INFO  [p.p.s.migrate] Applied database migration version 63 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:03,030 INFO  [p.p.s.migrate] Applying database migration version 64
+openvoxdb-1      | 2025-09-06 15:21:03,030 INFO  [p.p.s.migrate] [1/8] Cleaning up unreferenced facts...
+openvoxdb-1      | 2025-09-06 15:21:03,031 INFO  [p.p.s.migrate] [2/8] Creating new fact storage tables...
+openvoxdb-1      | 2025-09-06 15:21:03,033 INFO  [p.p.s.migrate] [3/8] Copying unique fact values into fact_values
+openvoxdb-1      | 2025-09-06 15:21:03,034 INFO  [p.p.s.migrate] [4/8] Reconstructing facts to refer to fact_values...
+openvoxdb-1      | 2025-09-06 15:21:03,035 INFO  [p.p.s.migrate] [5/8] Cleaning up duplicate null values...
+openvoxdb-1      | 2025-09-06 15:21:03,035 INFO  [p.p.s.migrate] [6/8] Computing fact value hashes...
+openvoxdb-1      | 2025-09-06 15:21:03,036 INFO  [p.p.s.migrate] [7/8] Indexing fact_values table...
+openvoxdb-1      | 2025-09-06 15:21:03,040 INFO  [p.p.s.migrate] [8/8] Indexing facts table...
+openvoxdb-1      | 2025-09-06 15:21:03,044 INFO  [p.p.s.migrate] Applied database migration version 64 in 13 ms
+openvoxdb-1      | 2025-09-06 15:21:03,044 INFO  [p.p.s.migrate] Applying database migration version 65
+openvoxdb-1      | 2025-09-06 15:21:03,048 INFO  [p.p.s.migrate] Applied database migration version 65 in 4 ms
+openvoxdb-1      | 2025-09-06 15:21:03,048 INFO  [p.p.s.migrate] Applying database migration version 66
+openvoxdb-1      | 2025-09-06 15:21:03,064 INFO  [p.p.s.migrate] Applied database migration version 66 in 15 ms
+openvoxdb-1      | 2025-09-06 15:21:03,064 INFO  [p.p.s.migrate] Applying database migration version 67
+openvoxdb-1      | 2025-09-06 15:21:03,064 INFO  [p.p.s.migrate] Applied database migration version 67 in 0 ms
+openvoxdb-1      | 2025-09-06 15:21:03,065 INFO  [p.p.s.migrate] Applying database migration version 68
+openvoxdb-1      | 2025-09-06 15:21:03,067 INFO  [p.p.s.migrate] Applied database migration version 68 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:03,067 INFO  [p.p.s.migrate] Applying database migration version 69
+openvoxdb-1      | 2025-09-06 15:21:03,067 INFO  [p.p.s.migrate] Applied database migration version 69 in 0 ms
+openvoxdb-1      | 2025-09-06 15:21:03,067 INFO  [p.p.s.migrate] Applying database migration version 70
+openvoxdb-1      | 2025-09-06 15:21:03,069 INFO  [p.p.s.migrate] Applied database migration version 70 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:03,069 INFO  [p.p.s.migrate] Applying database migration version 71
+openvoxdb-1      | 2025-09-06 15:21:03,070 INFO  [p.p.s.migrate] Applied database migration version 71 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:03,070 INFO  [p.p.s.migrate] Applying database migration version 72
+openvoxdb-1      | 2025-09-06 15:21:03,072 INFO  [p.p.s.migrate] Applied database migration version 72 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:03,073 INFO  [p.p.s.migrate] Applying database migration version 73
+openvoxdb-1      | 2025-09-06 15:21:03,122 INFO  [p.p.s.migrate] Creating partitions based on unique days in resource_events
+openvoxdb-1      | 2025-09-06 15:21:03,134 INFO  [p.p.s.migrate] Applied database migration version 73 in 61 ms
+openvoxdb-1      | 2025-09-06 15:21:03,135 INFO  [p.p.s.migrate] Applying database migration version 74
+openvoxdb-1      | 2025-09-06 15:21:03,222 INFO  [p.p.s.migrate] Creating partitions based on unique days in reports
+openvoxdb-1      | 2025-09-06 15:21:03,241 INFO  [p.p.s.migrate] Applied database migration version 74 in 106 ms
+openvoxdb-1      | 2025-09-06 15:21:03,241 INFO  [p.p.s.migrate] Applying database migration version 75
+openvoxdb-1      | 2025-09-06 15:21:03,245 INFO  [p.p.s.migrate] Applied database migration version 75 in 4 ms
+openvoxdb-1      | 2025-09-06 15:21:03,245 INFO  [p.p.s.migrate] Applying database migration version 76
+openvoxdb-1      | 2025-09-06 15:21:03,254 INFO  [p.p.s.migrate] Applied database migration version 76 in 9 ms
+openvoxdb-1      | 2025-09-06 15:21:03,254 INFO  [p.p.s.migrate] Applying database migration version 77
+openvoxdb-1      | 2025-09-06 15:21:03,255 INFO  [p.p.s.migrate] Applied database migration version 77 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:03,255 INFO  [p.p.s.migrate] Applying database migration version 78
+openvoxdb-1      | 2025-09-06 15:21:03,256 INFO  [p.p.s.migrate] Applied database migration version 78 in 1 ms
+openvoxdb-1      | 2025-09-06 15:21:03,256 INFO  [p.p.s.migrate] Applying database migration version 79
+openvoxdb-1      | 2025-09-06 15:21:03,264 INFO  [p.p.s.migrate] Applied database migration version 79 in 8 ms
+openvoxdb-1      | 2025-09-06 15:21:03,264 INFO  [p.p.s.migrate] Applying database migration version 80
+openvoxdb-1      | 2025-09-06 15:21:03,267 INFO  [p.p.s.migrate] Applied database migration version 80 in 3 ms
+openvoxdb-1      | 2025-09-06 15:21:03,267 INFO  [p.p.s.migrate] Applying database migration version 81
+openvoxdb-1      | 2025-09-06 15:21:03,299 INFO  [p.p.s.migrate] Applied database migration version 81 in 32 ms
+openvoxdb-1      | 2025-09-06 15:21:03,299 INFO  [p.p.s.migrate] Applying database migration version 82
+openvoxdb-1      | 2025-09-06 15:21:03,380 INFO  [p.p.s.migrate] Applied database migration version 82 in 81 ms
+openvoxdb-1      | 2025-09-06 15:21:03,380 INFO  [p.p.s.migrate] Applying database migration version 83
+openvoxdb-1      | 2025-09-06 15:21:03,382 INFO  [p.p.s.migrate] Creating additional index `fact_paths_path_trgm`
+openvoxdb-1      | 2025-09-06 15:21:03,384 INFO  [p.p.s.migrate] Creating additional index `packages_name_trgm`
+openvoxdb-1      | 2025-09-06 15:21:03,385 INFO  [p.p.s.migrate] Creating additional index `catalog_resources_file_trgm`
+openvoxdb-1      | 2025-09-06 15:21:03,386 INFO  [p.p.s.migrate] Applied database migration version 83 in 6 ms
+openvoxdb-1      | 2025-09-06 15:21:03,386 INFO  [p.p.s.migrate] Applying database migration version 84
+openvoxdb-1      | 2025-09-06 15:21:03,387 INFO  [p.p.s.migrate] Applied database migration version 84 in 0 ms
+openvoxdb-1      | 2025-09-06 15:21:03,387 INFO  [p.p.s.migrate] Applying database migration version 85
+openvoxdb-1      | 2025-09-06 15:21:03,390 INFO  [p.p.s.migrate] Applied database migration version 85 in 3 ms
+openvoxdb-1      | 2025-09-06 15:21:03,391 INFO  [p.p.s.migrate] Applying database migration version 86
+openvoxdb-1      | 2025-09-06 15:21:03,433 INFO  [p.p.s.migrate] Applied database migration version 86 in 42 ms
+openvoxdb-1      | 2025-09-06 15:21:03,434 INFO  [p.p.s.migrate] Applying database migration version 87
+openvoxdb-1      | 2025-09-06 15:21:03,457 INFO  [p.p.s.migrate] Applied database migration version 87 in 23 ms
+openvoxdb-1      | 2025-09-06 15:21:03,458 INFO  [p.p.s.migrate] Applying database migration version 88
+openvoxdb-1      | 2025-09-06 15:21:03,460 INFO  [p.p.s.migrate] Applied database migration version 88 in 2 ms
+openvoxdb-1      | 2025-09-06 15:21:03,460 INFO  [p.p.s.migrate] There are no pending migrations
+openvoxdb-1      | 2025-09-06 15:21:03,479 INFO  [p.p.s.migrate] Updating table statistics for: factsets, value_types, fact_paths, report_statuses
+openvoxdb-1      | 2025-09-06 15:21:03,485 ERROR [p.t.s.s.status-core] Status check for puppetdb-status threw an exception
+openvoxdb-1      | java.lang.IllegalStateException: Service has not started
+openvoxdb-1      | 	at puppetlabs.puppetdb.cli.services$throw_unless_started.invokeStatic(services.clj:1178)
+openvoxdb-1      | 	at puppetlabs.puppetdb.cli.services$throw_unless_started.invoke(services.clj:1175)
+openvoxdb-1      | 	at puppetlabs.puppetdb.cli.services$reify__36376$service_fnk__20469__auto___positional$reify__36388.shared_globals(services.clj:1253)
+openvoxdb-1      | 	at puppetlabs.puppetdb.cli.services$fn__36302$G__36264__36304.invoke(services.clj:1180)
+openvoxdb-1      | 	at puppetlabs.puppetdb.cli.services$fn__36302$G__36263__36307.invoke(services.clj:1180)
+openvoxdb-1      | 	at clojure.core$partial$fn__5908.invoke(core.clj:2640)
+openvoxdb-1      | 	at puppetlabs.puppetdb.status$fn__50712$status_details__50717$fn__50718.invoke(status.clj:39)
+openvoxdb-1      | 	at puppetlabs.puppetdb.status$fn__50712$status_details__50717.invoke(status.clj:32)
+openvoxdb-1      | 	at puppetlabs.puppetdb.pdb_routing$init_pdb_routing$fn__50863.invoke(pdb_routing.clj:128)
+openvoxdb-1      | 	at puppetlabs.trapperkeeper.services.status.status_core$fn__50320$guarded_status_fn_call__50325$fn__50326$fn__50329.invoke(status_core.clj:379)
+openvoxdb-1      | 	at clojure.core$binding_conveyor_fn$fn__5823.invoke(core.clj:2047)
+openvoxdb-1      | 	at clojure.lang.AFn.call(AFn.java:18)
+openvoxdb-1      | 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+openvoxdb-1      | 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+openvoxdb-1      | 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+openvoxdb-1      | 	at java.base/java.lang.Thread.run(Thread.java:840)
+openvoxdb-1      | 2025-09-06 15:21:03,488 INFO  [c.z.h.HikariDataSource] PDBMigrationsPool: default - Shutdown initiated...
+openvoxdb-1      | 2025-09-06 15:21:03,495 INFO  [c.z.h.HikariDataSource] PDBMigrationsPool: default - Shutdown completed.
+openvoxdb-1      | 2025-09-06 15:21:03,496 INFO  [c.z.h.HikariDataSource] PDBReadPool - Starting...
+openvoxdb-1      | 2025-09-06 15:21:03,497 INFO  [c.z.h.HikariDataSource] PDBReadPool - Start completed.
+openvoxdb-1      | 127.0.0.1 - - [06/Sep/2025:15:21:03 +0000] "GET /status/v1/services/puppetdb-status HTTP/1.1" 503 268 "-" "curl/8.5.0"
+openvoxdb-1      | 2025-09-06 15:21:03,536 ERROR [p.p.c.services] The read-database user is not configured properly because it has privileges other than SELECT on the puppetdb tables
+openvoxdb-1      | 2025-09-06 15:21:03,536 ERROR [p.p.c.services] The read-database user is not configured properly because it has ownership of tables
+openvoxdb-1      | 2025-09-06 15:21:03,536 ERROR [p.p.c.services] The read-database user is not configured properly because it is a superuser
+openvoxdb-1      | 2025-09-06 15:21:03,542 INFO  [c.z.h.HikariDataSource] PDBWritePool - Starting...
+openvoxdb-1      | 2025-09-06 15:21:03,543 INFO  [c.z.h.HikariDataSource] PDBWritePool - Start completed.
+openvoxdb-1      | 2025-09-06 15:21:03,550 INFO  [p.p.pdb-routing] PuppetDB finished starting, disabling maintenance mode
+openvoxdb-1      | 2025-09-06 15:21:03,551 INFO  [p.p.dashboard] Redirecting / to the PuppetDB dashboard
+openvoxdb-1      | 2025-09-06 15:21:03,553 INFO  [o.e.j.s.h.ContextHandler] Started o.e.j.s.ServletContextHandler@5a840474{/,null,AVAILABLE}
+openvoxdb-1      | 127.0.0.1 - - [06/Sep/2025:15:21:08 +0000] "GET /status/v1/services/puppetdb-status HTTP/1.1" 200 296 "-" "curl/8.5.0"
+openvoxdb-1      | 172.18.0.5 - - [06/Sep/2025:15:21:09 +0000] "GET /pdb/meta/v1/version HTTP/1.1" 200 26 "-" "puppetboard/6.0.1 (r/2.32.3)"
+puppetboard-1    | INFO:puppetboard.utils:PuppetDB version: 8.11.0
+puppetboard-1    | [2025-09-06 15:21:09 +0000] [1] [INFO] Starting gunicorn 23.0.0
+puppetboard-1    | [2025-09-06 15:21:09 +0000] [1] [INFO] Listening at: http://0.0.0.0:8088 (1)
+puppetboard-1    | [2025-09-06 15:21:09 +0000] [1] [INFO] Using worker: sync
+puppetboard-1    | [2025-09-06 15:21:09 +0000] [7] [INFO] Booting worker with pid: 7
+puppetboard-1    | 127.0.0.1 - - [06/Sep/2025:15:21:14 +0000] "GET /status HTTP/1.1" 200 2 "-" "python-requests/2.32.3"
+openvoxdb-1      | 127.0.0.1 - - [06/Sep/2025:15:21:18 +0000] "GET /status/v1/services/puppetdb-status HTTP/1.1" 200 296 "-" "curl/8.5.0"
+openvoxserver-1  | 127.0.0.1 - - - 06/Sep/2025:15:21:19 +0000 "GET /status/v1/simple HTTP/1.1" 200 7 127.0.0.1 127.0.0.1 8140 4
+openvoxdb-1      | 127.0.0.1 - - [06/Sep/2025:15:21:28 +0000] "GET /status/v1/services/puppetdb-status HTTP/1.1" 200 296 "-" "curl/8.5.0"
+openvoxdb-1      | 127.0.0.1 - - [06/Sep/2025:15:21:38 +0000] "GET /status/v1/services/puppetdb-status HTTP/1.1" 200 296 "-" "curl/8.5.0"
+openvoxserver-1  | 127.0.0.1 - - - 06/Sep/2025:15:21:41 +0000 "GET /status/v1/simple HTTP/1.1" 200 7 127.0.0.1 127.0.0.1 8140 4
+openvoxdb-1      | 127.0.0.1 - - [06/Sep/2025:15:21:48 +0000] "GET /status/v1/services/puppetdb-status HTTP/1.1" 200 296 "-" "curl/8.5.0"
+openvoxdb-1      | 127.0.0.1 - - [06/Sep/2025:15:21:58 +0000] "GET /status/v1/services/puppetdb-status HTTP/1.1" 200 296 "-" "curl/8.5.0"
+Gracefully Stopping... press Ctrl+C again to force
+ Container oss-puppetboard-1  Stopping
+ Container oss-postgres-1  Stopping
+ Container oss-postgres-1  Stopped
+[Kpostgres-1 exited with code 0
+ Container oss-puppetboard-1  Stopped
+ Container oss-openvoxdb-1  Stopping
+[Kpuppetboard-1 exited with code 0
+ Container oss-openvoxdb-1  Stopped
+ Container oss-openvoxserver-1  Stopping
+[Kopenvoxdb-1 exited with code 143
+ Container oss-openvoxserver-1  Stopped
+
