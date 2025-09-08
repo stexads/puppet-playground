@@ -1,9 +1,9 @@
 # Node definitions
-node /\.chello.ie$/ {
+node /\.0x3e.(lan|net)$/ {
 }
 
 # Define your node here...
 # The following line links the file name manifests/node/stefano.pp
-node stefano.chello.ie {
-  include "::node::${hostname}"
+node stefano.0x3e.lan {
+  include "::nodes::${hostname}"
 }
