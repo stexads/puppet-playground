@@ -1,3 +1,0 @@
-[submodule "puppet-environments/production/modules/geoipupdate"]
-	path = puppet-environments/production/modules/geoipupdate
-	url = git@github.com:Stefano-exads/puppet-geoipupdate.git
