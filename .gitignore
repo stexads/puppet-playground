@@ -1,3 +1,4 @@
 agent-ssl/
-puppet-environments/production/modules
+#puppet-environments/production/modules/*
+#!puppet-environments/production/modules/*/.git
 *.swp
