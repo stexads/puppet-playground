@@ -1,18 +1,31 @@
-# Default OpenVox Example
+# Puppet Playground
 
-## Start basic OpenVox setup
+## Start basic Playground setup
 
 ```shell
-docker compose --profile openvox up -d
+docker compose --profile play up -d
 ```
+
+## Start basic Playground setup
+
+```shell
+docker compose --profile play down -v
+```
+
+## Puppetboard
+Open up: <http://127.0.0.1:8088/>
 
 ## Test an agent
 
-when the openvox-profile is up and healthy, start the test-profile
-
+when the openvox-profile is up and healthy, start a generic agent:
+```shell
+docker run --rm --hostname puppet-agent --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /bin/bash
+```
+or the `test` profile:
 ```shell
 docker compose --profile test run testing agent -t
 ```
+
 
 ## Start hdm
 
@@ -25,7 +38,7 @@ then open up: <http://0.0.0.0:3000/>
 ## cleanup
 
 ```shell
-docker compose --profile openvox down
+docker compose --profile play down
 docker compose --profile hdm down
 docker compose --profile test down
 
@@ -35,9 +48,12 @@ docker volume rm oss_openvoxserver-ca
 docker volume rm oss_openvoxdb
 docker volume rm oss_openvoxdb-postgres
 docker volume rm oss_agent-ssl
+
+docker network rm crafty-oss
 ```
 
-## Generate additional certificates
+## Other
+### Generate additional certificates
 
 After the OpenVox stack is running, execute the following commant to generate an additional certificate.
 It will be put in the openvoxserver-ssl volume, or any other volume you may have mounted for `/etc/puppetlabs/puppet/ssl`.

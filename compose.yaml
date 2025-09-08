@@ -18,13 +18,13 @@ services:
       - openvoxserver-ca:/etc/puppetlabs/puppetserver/ca
       - ./openvox-code:/etc/puppetlabs/code
       # Mount entire /etc/puppetlabs/puppet to preserve changes
-#      - ./puppet-etc:/etc/puppetlabs/puppet:rw
+      - ./puppet-etc:/etc/puppetlabs/puppet:rw
       # Mount your host production environment into the container
       # This will override the 'production' folder in puppetserver-data
       - ./puppet-environments/production:/etc/puppetlabs/code/environments/production:rw
       # r10k
       - ./r10k:/etc/puppetlabs/r10k/
-      # Install script
+      # Install script (TODO Replace with custum image build)
       - ./startup.sh:/usr/local/bin/startup.sh
       # ssh
       - ./ssh:/root/.ssh/
@@ -34,11 +34,7 @@ services:
     ports:
       - 8140:8140
     profiles:
-      - openvox
-#    networks:
-#      default:
-#        aliases:
-#          - puppetserver
+      - play
 
 #  puppet-agent:
   testing:
@@ -64,7 +60,7 @@ services:
     ports:
       - 8081:8081
     profiles:
-      - openvox
+      - play
 
   postgres:
     image: docker.io/postgres:17-alpine
@@ -83,7 +79,7 @@ services:
       - ./postgresql_init:/docker-entrypoint-initdb.d
     restart: always
     profiles:
-      - openvox
+      - play
 
   puppetboard:
     image: ghcr.io/voxpupuli/puppetboard:latest
@@ -109,7 +105,7 @@ services:
     ports:
       - 8088:8088
     profiles:
-      - openvox
+      - play
 
   webhook:
     image: ghcr.io/voxpupuli/r10k-webhook:latest
