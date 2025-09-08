@@ -28,5 +28,10 @@ class nodes::stefano (
     #managehome => $ensure ? { present => true, default => false, },
   }
 
-  include geoipupdate
+  #include geoipupdate
+  class { 'geoipupdate':
+    account_id  => "",
+    license_key => "",
+    edition_ids => [ ],
+  }
 }
