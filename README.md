@@ -1,5 +1,7 @@
 # Puppet Playground
 
+This is work based on Openvox's [Crafty oss Example](https://github.com/voxpupuli/crafty/tree/main/openvox/oss)
+
 ## Start basic Playground setup
 
 ```shell
