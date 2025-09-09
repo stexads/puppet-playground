@@ -1,3 +1,6 @@
-geoipupdate::account_id: '12345'
-geoipupdate::license_key: '0987654321'
-geoipupdate::edition_ids: [ 'test0', 'test1' ]
+geoipupdate::account_id: 'hiera_12345'
+geoipupdate::license_key: 'hiera_0987654321'
+geoipupdate::edition_ids: [ 'test0', 'test1', 'test2' ]
+geoipupdate::package_ensure: 'present'
+#geoipupdate::package_ensure: 'absent'
+geoipupdate::package_name: 'geoipupdate'
