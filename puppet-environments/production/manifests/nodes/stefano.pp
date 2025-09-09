@@ -3,7 +3,7 @@ class nodes::stefano (
 ) {
 
   notify { "Hello, I am node '${::hostname}'": }
-  notify { "This message is coming from <production>/manifests/node/stefano.pp": }
+  notify { "This message is coming from <production>/manifests/nodes/stefano.pp": }
 
 
   ##### MOTD module ######
@@ -28,10 +28,12 @@ class nodes::stefano (
     #managehome => $ensure ? { present => true, default => false, },
   }
 
-  #include geoipupdate
+#  include geoipupdate
+
   class { 'geoipupdate':
-    account_id  => "",
-    license_key => "",
-    edition_ids => [ ],
+    account_id  => "123456",
+    license_key => "0987654321",
+    edition_ids => [ "test0", "test1" ],
   }
+
 }

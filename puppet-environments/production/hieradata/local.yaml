@@ -1,0 +1,3 @@
+geoipupdate::account_id: '12345'
+geoipupdate::license_key: '0987654321'
+geoipupdate::edition_ids: [ 'test0', 'test1' ]
