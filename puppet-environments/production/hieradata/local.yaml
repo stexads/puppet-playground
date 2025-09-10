@@ -5,3 +5,5 @@ geoipupdate::package_ensure: 'present'
 #geoipupdate::package_ensure: 'absent'
 geoipupdate::package_name: 'geoipupdate'
 geoipupdate::systemd_timer: true
+geoipupdate::service_update_cmd: '/usr/bin/dnf -y update geoipupdate'
+geoipupdate::timer_oncalendar: 'Mon *-*-* 10:21:00'
