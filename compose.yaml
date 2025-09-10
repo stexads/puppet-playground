@@ -6,6 +6,7 @@ services:
 #      dockerfile: Dockerfile.openvoxserver
     image: ghcr.io/openvoxproject/openvoxserver:latest
     hostname: puppet
+    container_name: puppetserver
     environment:
       OPENVOXSERVER_HOSTNAME: puppet
       OPENVOXSERVER_ENVIRONMENT_TIMEOUT: 0
@@ -39,7 +40,7 @@ services:
 #  puppet-agent:
   testing:
     image: ghcr.io/openvoxproject/openvoxagent:latest
-    container_name: crafty-testing
+    container_name: crafty-puppet-agent
     hostname: crafty-testing
     volumes:
       - agent-ssl:/etc/puppetlabs/puppet/ssl
@@ -49,6 +50,7 @@ services:
 
   openvoxdb:
     image: ghcr.io/openvoxproject/openvoxdb:latest
+    container_name: puppetdb
     hostname: openvoxdb
     volumes:
       - openvoxdb:/opt/puppetlabs/server/data/puppetdb
@@ -64,6 +66,7 @@ services:
 
   postgres:
     image: docker.io/postgres:17-alpine
+    container_name: postgres
     hostname: postgres
     environment:
       - POSTGRES_DB=openvoxdb
@@ -83,6 +86,7 @@ services:
 
   puppetboard:
     image: ghcr.io/voxpupuli/puppetboard:latest
+    container_name: puppetboard
     hostname: puppetboard
     environment:
       - PUPPETDB_HOST=openvoxdb
@@ -109,6 +113,7 @@ services:
 
   webhook:
     image: ghcr.io/voxpupuli/r10k-webhook:latest
+    container_name: webhook
     hostname: webhook
     environment:
       - PUPPET_CONTROL_REPO="https://git.example.org/puppet/control.git"
@@ -130,6 +135,7 @@ services:
 
   hdm:
     image: ghcr.io/betadots/hdm:latest
+    container_name: hdm
     hostname: hdm
     environment:
       - SECRET_KEY_BASE=9dea7603c008dec285e4b231602a00b2
