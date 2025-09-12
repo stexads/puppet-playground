@@ -1,5 +1,5 @@
 agent-ssl/
-ssl/*
+ssh/*
 puppet-etc/devices/
 puppet-environments/production/modules/*
 !puppet-environments/production/modules/*/.git
