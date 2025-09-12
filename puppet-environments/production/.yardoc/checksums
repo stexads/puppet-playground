@@ -1,0 +1,2 @@
+manifests/001_nodes.pp 63520f9ca5e7858ddd335181646ccbc28487d3c8
+manifests/nodes/stefano.pp e394d5d6f8f437a0bc109f611f37b4fbe50014c3

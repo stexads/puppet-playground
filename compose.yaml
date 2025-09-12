@@ -24,7 +24,7 @@ services:
       # This will override the 'production' folder in puppetserver-data
       - ./puppet-environments/production:/etc/puppetlabs/code/environments/production:rw
       # r10k
-      #- ./r10k:/etc/puppetlabs/r10k/
+      - ./r10k:/etc/puppetlabs/r10k/
       # Install script (TODO Replace with custum image build)
       - ./startup.sh:/usr/local/bin/startup.sh
       # ssh

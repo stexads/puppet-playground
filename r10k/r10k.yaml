@@ -9,11 +9,6 @@ git:
 sources:
   # This will clone the git repository and instantiate an environment per
   # branch in /etc/puppetlabs/code/environments
-  exads:
-    remote: 'git@github.com:EXADS/sys-puppet'
+  production-test:
+    remote: 'git@github.com:stexads/puppet-playground'
     basedir: '/etc/puppetlabs/code/environments'
-
-#:sources:
-#  production:
-#    remote: 'git@github.com:Stefano-exads/puppet-geoipupdate'
-#    basedir: '/etc/puppetlabs/code/environments'

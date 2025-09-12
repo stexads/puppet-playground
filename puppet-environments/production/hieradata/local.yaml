@@ -1,9 +1,12 @@
 geoipupdate::account_id: 'hiera_12345'
 geoipupdate::license_key: 'hiera_0987654321'
 geoipupdate::edition_ids: [ 'test0', 'test1', 'test2' ]
-geoipupdate::package_ensure: 'present'
+geoipupdate::package_ensure: 'installed'
+#geoipupdate::package_ensure: 'present'
+#geoipupdate::package_ensure: 'latest'
 #geoipupdate::package_ensure: 'absent'
+#geoipupdate::package_ensure: 'purged'
+#geoipupdate::package_ensure: 'disabled'
 geoipupdate::package_name: 'geoipupdate'
-geoipupdate::systemd_timer: true
 geoipupdate::service_update_cmd: '/usr/bin/dnf -y update geoipupdate'
-geoipupdate::timer_oncalendar: 'Mon *-*-* 10:21:00'
+geoipupdate::timer_oncalendar: '*-*-* *:*:00'
