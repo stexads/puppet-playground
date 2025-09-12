@@ -55,7 +55,7 @@ docker compose --profile test run testing agent -t
 ```
 
 ### Agent with systemd
-First spin up a systemd image:
+First spin up a `systemd`-based image like `el9` with the following command:
 ```shell
 docker run --privileged --rm --name agent --hostname stefano.0x3e.lan --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /sbin/init
 ```
