@@ -133,6 +133,7 @@ services:
     profiles:
       - webhook
 
+  # Hiera Data Manager
   hdm:
     image: ghcr.io/betadots/hdm:latest
     container_name: hdm

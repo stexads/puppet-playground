@@ -1,9 +1,27 @@
 # Puppet Playground
 
+>Latest Puppet playground (for your tests and developement) that just works!
+
 This is work based on Openvox's [Crafty oss Example](https://github.com/voxpupuli/crafty/tree/main/openvox/oss)
 
-## Start basic Playground setup
 
+## Clone the repository
+Navigate to the chosen directory and clone the repository with:
+```shell
+git clone git@github.com:stexads/puppet-playground.git
+```
+
+The rest of this document assumes will list a series of commands that should
+be typed from inside the cloned repository.
+For example:
+```shell
+mkdir ~/sandbox
+cd ~/sandbox
+git clone git@github.com:stexads/puppet-playground.git
+cd puppet-playground
+```
+
+## Start basic Playground setup
 ```shell
 docker compose --profile play up
 ```
