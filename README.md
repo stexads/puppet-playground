@@ -110,7 +110,9 @@ docker network rm crafty-oss
 # Troubleshooting
 ## Certificate error
 You might get the following error at some stage:
-`Error: certificate verify failed [unable to get local issuer certificate for CN=puppet]`
+```shell
+Error: certificate verify failed [unable to get local issuer certificate for CN=puppet]
+```
 
 Steps to resolve:
 On `puppetserver`:
