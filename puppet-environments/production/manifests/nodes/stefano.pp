@@ -11,7 +11,7 @@ class nodes::stefano (
     package_ensure     => 'present',
     package_name       => 'geoipupdate',
     service_update_cmd => '/usr/bin/dnf -y update geoipupdate',
-    timer_oncalendar   => 'Mon-Fri *:*:00',
+    timer_oncalendar   => 'Mon-Fri *:*:00/30',
   }
 
 }

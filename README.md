@@ -5,10 +5,10 @@ This is work based on Openvox's [Crafty oss Example](https://github.com/voxpupul
 ## Start basic Playground setup
 
 ```shell
-docker compose --profile play up -d
+docker compose --profile play up
 ```
 
-## Start basic Playground setup
+## Stop basic Playground setup
 
 ```shell
 docker compose --profile play down -v
@@ -17,19 +17,53 @@ docker compose --profile play down -v
 ## Puppetboard
 Open up: <http://127.0.0.1:8088/>
 
+## Puppetserver
+To login the puppetserver:
+```shell
+docker exec -it puppetserver bash
+```
+
 ## Test an agent
 
-when the openvox-profile is up and healthy, start a generic agent:
+### Generic agent (no systemd)
+When the `play` profile is up and healthy, start a generic agent (no `systemd`):
 ```shell
 docker run --rm --hostname puppet-agent --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /bin/bash
 ```
-or the `test` profile:
+
+Using the `test` profile (note: this option has not been tested):
 ```shell
 docker compose --profile test run testing agent -t
 ```
 
+### Agent with systemd
+First spin up a systemd image:
+```shell
+docker run --privileged --rm --name agent --hostname stefano.0x3e.lan --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /sbin/init
+```
+Then, by using a seperate tty, login to the image:
+```shell
+docker exec -it agent bash
+```
+This will open up a shell in the agent.
+Next we need to install `puppet` as the image does not come with `puppet` installed:
+```shell
+apt update && apt install -y puppet
+```
 
-## Start hdm
+### Connect agent to `puppetserver`.
+Finally we can connect the agent to the puppetserver:
+```shell
+puppet agent -tv
+```
+
+
+
+
+
+
+
+## Start HDM (Hiera Data Manager)
 
 ```shell
 docker compose --profile hdm up -d
@@ -54,33 +88,22 @@ docker volume rm oss_agent-ssl
 docker network rm crafty-oss
 ```
 
-## Other
-### Generate additional certificates
 
-After the OpenVox stack is running, execute the following commant to generate an additional certificate.
-It will be put in the openvoxserver-ssl volume, or any other volume you may have mounted for `/etc/puppetlabs/puppet/ssl`.
+# Troubleshooting
+## Certificate error
+You might get the following error at some stage:
+`Error: certificate verify failed [unable to get local issuer certificate for CN=puppet]`
 
-```bash
-docker exec oss-puppet-1 puppetserver ca generate --certname puppetboard
+Steps to resolve:
+On `puppetserver`:
+
+```shell
+puppetserver ca list --all
+puppetserver ca clean --certname <agent-node-certname>
 ```
 
-Output:
-
-```text
-Successfully saved private key for puppetboard to /etc/puppetlabs/puppet/ssl/private_keys/puppetboard.pem
-Successfully saved public key for puppetboard to /etc/puppetlabs/puppet/ssl/public_keys/puppetboard.pem
-Successfully submitted certificate request for puppetboard
-Successfully saved certificate for puppetboard to /etc/puppetlabs/puppet/ssl/certs/puppetboard.pem
-Certificate for puppetboard was autosigned.
-```
-
-One can then mount the openvoxserver-ssl or whatever mount one have to the additional container, which shall use the certs.
-But in general this is a bad idea, but for testing this might work.
-
-For the puppetboard, one also can specify the certs as base64 strings. To get the strings do:
-
-```bash
-docker exec oss-puppet-1 cat /etc/puppetlabs/puppet/ssl/certs/ca.pem | base64
-docker exec oss-puppet-1 cat /etc/puppetlabs/puppet/ssl/certs/puppetboard.pem | base64
-docker exec oss-puppet-1 cat /etc/puppetlabs/puppet/ssl/private_keys/puppetboard.pem | base64
+On puppet agent:
+```shell
+sudo rm -rf /etc/puppetlabs/puppet/ssl
+puppet agent -tv
 ```
