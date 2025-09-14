@@ -2,16 +2,17 @@ class nodes::stefano (
   String $version = '0.0.1'
 ) {
 
-#  include geoipupdate
+  # For use with hieradata
+  #include geoipupdate
 
+  # For module version >= 0.9.5
   class { 'geoipupdate':
+    package_ensure     => 'present',
     account_id         => 'test',
     license_key        => 'test',
     edition_ids        => 'GeoIP2-Country GeoIP2-City GeoIP2-ISP GeoIP2-Connection-Type',
-    package_ensure     => 'present',
-    package_name       => 'geoipupdate',
-    service_update_cmd => '/usr/bin/dnf -y update geoipupdate',
-    timer_oncalendar   => 'Mon-Fri *:*:00/30',
+    conf_dir           => '/etc',
+    timer_oncalendar   => '*:*:00/30',
   }
 
 }
