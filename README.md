@@ -23,13 +23,13 @@ cd puppet-playground
 
 ## Start basic Playground setup
 ```shell
-docker compose --profile play up
+podman compose --profile play up
 ```
 
 ## Stop basic Playground setup
 
 ```shell
-docker compose --profile play down -v
+podman compose --profile play down -v
 ```
 
 ## Puppetboard
@@ -38,7 +38,7 @@ Open up: <http://127.0.0.1:8088/>
 ## Puppetserver
 To login the puppetserver:
 ```shell
-docker exec -it puppetserver bash
+podman exec -it puppetserver bash
 ```
 
 ## Test an agent
@@ -46,22 +46,22 @@ docker exec -it puppetserver bash
 ### Generic agent (no systemd)
 When the `play` profile is up and healthy, start a generic agent (no `systemd`):
 ```shell
-docker run --rm --hostname puppet-agent --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /bin/bash
+podman run --rm --hostname puppet-agent --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /bin/bash
 ```
 
 Using the `test` profile (note: this option has not been tested):
 ```shell
-docker compose --profile test run testing agent -t
+podman compose --profile test run testing agent -t
 ```
 
 ### Agent with systemd
 First spin up a `systemd`-based image like `el9` with the following command:
 ```shell
-docker run --privileged --rm --name agent --hostname stefano.0x3e.lan --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /sbin/init
+podman run --privileged --rm --name agent --hostname stefano.0x3e.lan --network crafty-oss -it ghcr.io/exogroup/generic/el9:latest /sbin/init
 ```
 Then, by using a seperate tty, login to the image:
 ```shell
-docker exec -it agent bash
+podman exec -it agent bash
 ```
 This will open up a shell in the agent.
 Next we need to install `puppet` as the image does not come with `puppet` installed:
@@ -84,7 +84,7 @@ puppet agent -tv
 ## Start HDM (Hiera Data Manager)
 
 ```shell
-docker compose --profile hdm up -d
+podman compose --profile hdm up -d
 ```
 
 then open up: <http://0.0.0.0:3000/>
@@ -92,18 +92,18 @@ then open up: <http://0.0.0.0:3000/>
 ## cleanup
 
 ```shell
-docker compose --profile play down
-docker compose --profile hdm down
-docker compose --profile test down
+podman compose --profile play down
+podman compose --profile hdm down
+podman compose --profile test down
 
-docker volume rm oss_openvoxserver
-docker volume rm oss_openvoxserver-ssl
-docker volume rm oss_openvoxserver-ca
-docker volume rm oss_openvoxdb
-docker volume rm oss_openvoxdb-postgres
-docker volume rm oss_agent-ssl
+podman volume rm oss_openvoxserver
+podman volume rm oss_openvoxserver-ssl
+podman volume rm oss_openvoxserver-ca
+podman volume rm oss_openvoxdb
+podman volume rm oss_openvoxdb-postgres
+podman volume rm oss_agent-ssl
 
-docker network rm crafty-oss
+podman network rm crafty-oss
 ```
 
 
