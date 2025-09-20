@@ -1,68 +1,51 @@
 ---
 services:
+  # puppetserver
   openvoxserver:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.openvoxserver
     image: ghcr.io/openvoxproject/openvoxserver:latest
     hostname: puppet
     container_name: puppetserver
     environment:
       OPENVOXSERVER_HOSTNAME: puppet
-      OPENVOXSERVER_ENVIRONMENT_TIMEOUT: 0
+#      OPENVOXSERVER_ENVIRONMENT_TIMEOUT: 0
       CSR_ATTRIBUTES: '{"custom_attributes": { "challengePassword": "foobar" }, "extension_requests": { "pp_project": "foo" } }'
-      # For private repos, use git@github.com:user/repo.git and provide SSH keys
-      # R10K_REMOTE: https://github.com/betadots/demo-control-repo.git
     volumes:
-      - openvoxserver:/opt/puppetlabs/server/data/puppetserver
-      - openvoxserver-ssl:/etc/puppetlabs/puppet/ssl
-      - openvoxserver-ca:/etc/puppetlabs/puppetserver/ca
-      - ./openvox-code:/etc/puppetlabs/code
-      # Mount entire /etc/puppetlabs/puppet to preserve changes
-      - ./puppet-etc:/etc/puppetlabs/puppet:rw
-      # Mount your host production environment into the container
+      - openvoxserver:/opt/puppetlabs/server/data/puppetserver:Z
+      - openvoxserver-ssl:/etc/puppetlabs/puppet/ssl:Z
+      - openvoxserver-ca:/etc/puppetlabs/puppetserver/ca:Z
+      - openvox-code:/etc/puppetlabs/code:Z
       # This will override the 'production' folder in puppetserver-data
-      - ./puppet-environments/production:/etc/puppetlabs/code/environments/production:rw
+      - ./puppet-environments/production:/etc/puppetlabs/code/environments/production:Z
       # r10k
-      - ./r10k:/etc/puppetlabs/r10k/
+      - ./r10k:/etc/puppetlabs/r10k/:Z
+      # Mount entire /etc/puppetlabs/puppet to preserve changes
+      - ./puppet-etc:/etc/puppetlabs/puppet:Z
       # Install script (TODO Replace with custum image build)
-      - ./startup.sh:/usr/local/bin/startup.sh
+      - ./startup.sh:/usr/local/bin/startup.sh:Z
       # ssh
-      - ./ssh:/root/.ssh/
+      - ./ssh:/root/.ssh/:Z
     post_start:
       - command: bash -c "/usr/local/bin/startup.sh"
     restart: always
     ports:
       - 8140:8140
-    profiles:
-      - play
-
-#  puppet-agent:
-  testing:
-    image: ghcr.io/openvoxproject/openvoxagent:latest
-    container_name: crafty-puppet-agent
-    hostname: crafty-testing
-    volumes:
-      - agent-ssl:/etc/puppetlabs/puppet/ssl
-#    restart: always
-    profiles:
-      - test
 
   openvoxdb:
     image: ghcr.io/openvoxproject/openvoxdb:latest
     container_name: puppetdb
     hostname: openvoxdb
+    environment:
+      PUPPETDB_FACT_VALUES_LIMIT: 8192
     volumes:
-      - openvoxdb:/opt/puppetlabs/server/data/puppetdb
+      - openvoxdb:/opt/puppetlabs/server/data/puppetdb:Z
     restart: always
     depends_on:
       openvoxserver:
-        condition: service_healthy
+#        condition not supported in podman
+#        condition: service_healthy
         restart: true
     ports:
       - 8081:8081
-    profiles:
-      - play
 
   postgres:
     image: docker.io/postgres:17-alpine
@@ -78,12 +61,12 @@ services:
       timeout: 3s
       retries: 3
     volumes:
-      - openvoxdb-postgres:/var/lib/postgresql/data
-      - ./postgresql_init:/docker-entrypoint-initdb.d
+      - postgres-data:/var/lib/postgresql/data:Z
+      # use /container-entrypoint.d/ instead...
+      - ./postgres-init:/docker-entrypoint-initdb.d:Z
     restart: always
-    profiles:
-      - play
 
+  # puppetboard
   puppetboard:
     image: ghcr.io/voxpupuli/puppetboard:latest
     container_name: puppetboard
@@ -100,55 +83,16 @@ services:
     #   - PUPPETDB_KEY=/etc/puppetlabs/puppet/ssl/private_keys/puppetboard.pem
     #   - PUPPETDB_CERT=/etc/puppetlabs/puppet/ssl/certs/puppetboard.pem
     # volumes:
-    #   - puppetserver-ssl:/etc/puppetlabs/puppet/ssl
+    #   - puppetserver-ssl:/etc/puppetlabs/puppet/ssl:Z
     restart: always
     depends_on:
       openvoxdb:
-        condition: service_healthy
+#        condition not supported in podman
+#        condition: service_healthy
         restart: true
     ports:
       - 8088:8088
-    profiles:
-      - play
 
-  webhook:
-    image: ghcr.io/voxpupuli/r10k-webhook:latest
-    container_name: webhook
-    hostname: webhook
-    environment:
-      - PUPPET_CONTROL_REPO="https://git.example.org/puppet/control.git"
-      - USER="puppet"
-      - PASSWORD="puppet"
-      # For using HTTPS enable tls and uncomment the following lines
-      #- TLS=true
-      #- TLS_CERT="/etc/puppetlabs/puppet/ssl/certs/puppet.pem"
-      #- TLS_KEY="/etc/puppetlabs/puppet/ssl/private_keys/puppet.pem"
-    volumes:
-      - ./openvox-code:/etc/puppetlabs/code
-      # For using HTTPS enable tls above and mount your key/cert directory
-      #- openvoxserver-ssl:/etc/puppetlabs/puppet/ssl:ro
-    ports:
-      - 4000:4000
-    restart: always
-    profiles:
-      - webhook
-
-  # Hiera Data Manager
-  hdm:
-    image: ghcr.io/betadots/hdm:latest
-    container_name: hdm
-    hostname: hdm
-    environment:
-      - SECRET_KEY_BASE=9dea7603c008dec285e4b231602a00b2
-    volumes:
-      - ./hdm_config/hdm.yml:/hdm/config/hdm.yml:ro
-      - ./hdm_config/database.yml:/hdm/config/database.yml:ro
-      - hdm-db:/db
-      - ./openvox-code:/etc/puppetlabs/code
-    ports:
-      - 3000:3000
-    profiles:
-      - hdm
 
 networks:
   default:
@@ -158,7 +102,6 @@ volumes:
   openvoxserver:
   openvoxserver-ssl:
   openvoxserver-ca:
+  openvox-code:
   openvoxdb:
-  openvoxdb-postgres:
-  agent-ssl:
-  hdm-db:
+  postgres-data:
