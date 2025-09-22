@@ -7,7 +7,8 @@ services:
     container_name: puppetserver
     environment:
       OPENVOXSERVER_HOSTNAME: puppet
-#      OPENVOXSERVER_ENVIRONMENT_TIMEOUT: 0
+      # duration Puppet Server waits before reloading code from disk
+      OPENVOXSERVER_ENVIRONMENT_TIMEOUT: 0
       CSR_ATTRIBUTES: '{"custom_attributes": { "challengePassword": "foobar" }, "extension_requests": { "pp_project": "foo" } }'
     volumes:
       - openvoxserver:/opt/puppetlabs/server/data/puppetserver:Z

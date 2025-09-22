@@ -5,14 +5,17 @@ class nodes::stefano (
   # For use with hieradata
   #include geoipupdate
 
-  # For module version >= 0.9.5
+  # For module version >= 0.9.7
   class { 'geoipupdate':
-    package_ensure     => 'present',
+    # Optional parameter package_name defaults to 'geoipupdate'
+    package_name       => 'geoipupdate',
+    presence_status    => 'present', # Enum [ "present", "absent" ]
     account_id         => 'test',
-    license_key        => 'test',
-    edition_ids        => 'GeoIP2-Country GeoIP2-City GeoIP2-ISP GeoIP2-Connection-Type',
+    license_key        => 'testKey',
+    edition_ids        => 'GeoIP2-Country GeoIP2-City GeoIP2-ISP',
     conf_dir           => '/etc',
-    timer_oncalendar   => '*:*:00/30',
+    target_dir         => '/tmp/geoip',
+    timer_oncalendar   => '*-*-* *:00:*',
   }
 
 }
